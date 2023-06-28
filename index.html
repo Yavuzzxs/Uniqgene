@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Genetic Capacity</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <style>
+        #chart-container {
+            margin: top 100px;
+            height: 400px;
+            width: 1200px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .chart-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .chart-legend li span {
+            width: 20px;
+            height: 20px;
+        }
+
+        .chart-legend li span + span {
+            margin-left: 12px;
+        }
+
+        .chart-legend li span:before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+        }
+
+        .x-axis-labels {
+            font-size: 14px;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["Power Predisposition", "Endurance Predisposition", "Injury Risk", "Oxygen Capacity", "Motor Skills"],
+                datasets: [
+                    {
+                        label: "Person 1",
+                        data: [67, 33, 25, 33, 0],
+                        backgroundColor: "#0080ff"
+                    },
+                    {
+                        label: "Person 2",
+                        data: [55, 45, 50, 54, 50],
+                        backgroundColor: "#ff0000"
+                    },
+                    {
+                        label: "Person 3",
+                        data: [48, 52, 25, 42, 0],
+                        backgroundColor: "#0000ff"
+                    },
+                    {
+                        label: "Person 4",
+                        data: [80, 20, 100, 70, 75],
+                        backgroundColor: "#ffff00"
+                    },
+                    {
+                        label: "Person 5",
+                        data: [63, 37, 0, 95, 100],
+                        backgroundColor: "#808080"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 14
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Traits",
+                            fontSize: 16
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: "Genetic Capacity",
+                    fontSize: 24
+                },
+                legend: {
+                    display: true,
+                    labels: {
+                        fontSize: 14
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

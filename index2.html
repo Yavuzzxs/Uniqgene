@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th></th>
+            <th>1. Sütun</th>
+            <th>2. Sütun</th>
+            <th>3. Sütun</th>
+        </tr>
+        <tr>
+            <td draggable="false" ondragstart="handleDragStart(event)">1. Satır</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">AA<br>PERSON A<br>1 cup/day</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">AB<br>Person B<br>2 cup/day</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">BB<br>Person C<br>5 cup/day</td>
+        </tr>
+        <tr>
+            <td draggable="false" ondragstart="handleDragStart(event)">2. Satır</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">AA<br>Person G<br>Never</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">AB<br>Person E<br>5 cup/day</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">BB<br>Person D<br>13 cup/day</td>
+        </tr>
+        <tr>
+            <td draggable="false" ondragstart="handleDragStart(event)">3. Satır</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">AB<br>Person D<br>Don't like</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">AB<br>Person J<br>15 cup/day</td>
+            <td draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+                ondrop="handleDrop(event)">BB<br>Person K<br>8 cup/day</td>
+        </tr>
+    </table>
+    <script>
+        function handleDragStart(event) {
+            event.dataTransfer.setData('text/plain', event.target.parentNode.rowIndex);
+            event.dataTransfer.setData('text/html', event.target.innerHTML);
+        }
+
+        function handleDragOver(event) {
+            
+            event.preventDefault();
+        }
+
+        function handleDrop(event) {
+            var sourceRowIndex = event.dataTransfer.getData('text/plain');
+            var sourceCellContent = event.dataTransfer.getData('text/html');
+            var targetRowIndex = event.currentTarget.parentNode.rowIndex;
+            if (sourceRowIndex != targetRowIndex) {
+                return;
+            }
+            event.currentTarget.innerHTML = sourceCellContent;
+            var draggedCell = document.querySelector('.dragged');
+            if (draggedCell) {
+                draggedCell.innerHTML = '';
+                draggedCell.classList.remove('dragged');
+            }
+        }
+        function handleDragStart(event) {
+            event.dataTransfer.setData('text/plain', event.target.parentNode.rowIndex);
+            event.dataTransfer.setData('text/html', event.target.innerHTML);
+            event.target.classList.add('dragged');
+        }
+    </script>
+</body>
+</html>
